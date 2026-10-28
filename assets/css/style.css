@@ -172,6 +172,8 @@ dialog .close { position: absolute; right: 16px; top: 12px; background: none; bo
 #modalChart { height: 220px; }
 
 footer { text-align: center; color: var(--dim); font-size: .88rem; padding: 60px 16px 50px; }
+footer .social { display: inline-flex; margin-top: 10px; padding: 8px; border-radius: 10px; color: var(--muted); transition: color .15s, background .15s; }
+footer .social:hover { color: #fff; background: #0a66c2; text-decoration: none; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 960px) {
