@@ -1,0 +1,46 @@
+name: Refresh data & deploy
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # every Monday 06:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: ["data/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch latest citation data
+        if: github.event_name != 'push'
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+        run: python scripts/fetch_data.py
+      - name: Commit dataset
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "atlas-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ README.md
+          git diff --cached --quiet || git commit -m "data: weekly refresh $(date -u +%F)"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

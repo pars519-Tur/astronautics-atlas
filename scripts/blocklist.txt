@@ -1,0 +1,6 @@
+# OpenAlex work IDs to exclude (mis-attributed or misclassified records).
+# One ID per line; text after '#' is ignored.
+W1999075212  # parabolic-flight paper inheriting a journal's citation count
+W2320630676  # "Progress in Low Temperature Physics" - not astronautics
+W1999740412  # "An Introduction to Fluid Mechanics" - misclassified
+W2283076885  # duplicate of W1516952899 (Clohessy-Wiltshire, 1960)

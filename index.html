@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astronautics Atlas — The most-cited research in spaceflight</title>
+  <meta name="description" content="A self-updating atlas of the most-cited, fastest-rising astronautics papers: astrodynamics, propulsion, spacecraft, space debris and more. Refreshed weekly from OpenAlex.">
+  <meta property="og:title" content="Astronautics Atlas">
+  <meta property="og:description" content="The most-cited research in spaceflight, tracked weekly.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#05070f">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="hero">
+    <nav class="topbar">
+      <a class="brand" href="#top"><span class="brand-orb"></span>Astronautics Atlas</a>
+      <div class="links">
+        <a href="#hall">Hall of Fame</a>
+        <a href="#rising">Rising</a>
+        <a href="#galaxy">Galaxy</a>
+        <a href="#topics">Topics</a>
+        <a href="#world">World</a>
+        <a href="#venues">Journals</a>
+        <a class="gh" href="https://github.com/pars519-Tur/astronautics-atlas" target="_blank" rel="noopener">★ GitHub</a>
+      </div>
+    </nav>
+
+    <div class="hero-body" id="top">
+      <p class="eyebrow"><span class="pulse"></span> Live dataset · updated <span id="updated">…</span></p>
+      <h1>The most-cited research<br><span class="grad">in spaceflight.</span></h1>
+      <p class="lede">An atlas of astronautics literature: the classic papers everyone builds on, the ones rising fastest right now, and who is writing them. It refreshes itself every week from open scholarly data.</p>
+      <div class="kpis">
+        <div class="kpi"><b data-count="works">0</b><span>astronautics works indexed</span></div>
+        <div class="kpi"><b data-count="thisYear">0</b><span>published this year</span></div>
+        <div class="kpi"><b data-count="countries">0</b><span>countries contributing</span></div>
+        <div class="kpi"><b data-count="topCites">0</b><span>citations on the #1 paper</span></div>
+      </div>
+    </div>
+    <div class="orbit-art" aria-hidden="true"><div class="ring r1"><i></i></div><div class="ring r2"><i></i></div><div class="ring r3"><i></i></div><div class="planet"></div></div>
+  </header>
+
+  <main>
+    <section id="hall">
+      <div class="sec-head">
+        <h2><span class="num">01</span> Hall of Fame</h2>
+        <p>The 100 most-cited astronautics works of all time. Filter by field or era, or sort by momentum.</p>
+      </div>
+      <div class="podium" id="podium"></div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search title, author, journal…" autocomplete="off">
+        <select id="era">
+          <option value="all">All eras</option>
+          <option value="0-1979">Space Race (≤1979)</option>
+          <option value="1980-1999">Shuttle Era (1980–99)</option>
+          <option value="2000-2014">ISS Era (2000–14)</option>
+          <option value="2015-9999">NewSpace (2015+)</option>
+        </select>
+        <select id="sort">
+          <option value="citations">Sort: total citations</option>
+          <option value="recent">Sort: citations, last 2 years</option>
+          <option value="velocity">Sort: citations / year</option>
+          <option value="influential">Sort: influential citations</option>
+        </select>
+      </div>
+      <div class="chips" id="topicChips"></div>
+      <ol class="paper-list" id="hallList"></ol>
+      <button class="more" id="hallMore">Show more</button>
+    </section>
+
+    <section id="rising">
+      <div class="sec-head">
+        <h2><span class="num">02</span> Rising Stars</h2>
+        <p>Papers from the last six years ranked by citations gained this year and last year: the work the field is reading right now.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card stretch"><h3>Momentum <small>citations gained this year + last year</small></h3><div class="chart" id="risingChart"></div></div>
+        <div class="card"><h3>Fresh hits <small>published in the last 2 years</small></h3><ol class="mini-list" id="freshList"></ol></div>
+      </div>
+    </section>
+
+    <section id="galaxy">
+      <div class="sec-head">
+        <h2><span class="num">03</span> Citation Galaxy</h2>
+        <p>Every highlighted paper as a star: year on the x-axis, citations on a log scale, size by citations per year. Click a star to open it.</p>
+      </div>
+      <div class="card"><div class="chart xl" id="galaxyChart"></div></div>
+    </section>
+
+    <section id="topics">
+      <div class="sec-head">
+        <h2><span class="num">04</span> The Landscape</h2>
+        <p>How output in each astronautics field has grown since Sputnik, and what each field's canon looks like.</p>
+      </div>
+      <div class="grid-2 wide-left">
+        <div class="card"><h3>Publications per year</h3><div class="chart" id="yearChart"></div></div>
+        <div class="card"><h3>Share of the field</h3><div class="chart" id="shareChart"></div></div>
+      </div>
+      <div class="card topic-explorer">
+        <div class="tabs" id="topicTabs"></div>
+        <ol class="mini-list cols" id="topicList"></ol>
+      </div>
+    </section>
+
+    <section id="world">
+      <div class="sec-head">
+        <h2><span class="num">05</span> Who builds the field</h2>
+        <p>Works with at least one author affiliated in each country. Switch to the last four years to see the new space race.</p>
+      </div>
+      <div class="card">
+        <div class="seg" id="worldSeg"><button class="on" data-v="all">All time</button><button data-v="recent">Last 4 years</button></div>
+        <div class="grid-2 wide-left flat">
+          <div class="chart xl" id="worldChart"></div>
+          <div class="chart xl" id="countryBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="venues">
+      <div class="sec-head">
+        <h2><span class="num">06</span> Journals &amp; Institutions</h2>
+        <p>Where astronautics gets published, and the institutions that publish the most.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card"><h3>Top journals</h3><div class="chart tall" id="sourceChart"></div></div>
+        <div class="card"><h3>Top institutions</h3><div class="chart tall" id="instChart"></div></div>
+      </div>
+      <div class="grid-2 wide-right">
+        <div class="card"><h3>Open access</h3><div class="chart" id="oaChart"></div></div>
+        <div class="card about">
+          <h3>How this works</h3>
+          <p>Every Monday a GitHub Action queries <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> for eight astronautics research topics and enriches the results with <a href="https://www.semanticscholar.org" target="_blank" rel="noopener">Semantic Scholar</a> influential-citation counts. It then commits a fresh <code>data/dataset.json</code> and redeploys the site. There's no server or database, and it costs nothing to run.</p>
+          <ul>
+            <li><b>Citations</b>: total times cited, per OpenAlex.</li>
+            <li><b>Momentum</b>: citations received this year plus last year.</li>
+            <li><b>Influential</b>: citations where the paper meaningfully shaped the citing work (Semantic Scholar).</li>
+            <li><b>FWCI</b>: field-weighted citation impact; 1.0 is the world average for similar papers.</li>
+          </ul>
+          <p class="muted">Download and read counts aren't openly published by most aerospace publishers, so momentum and influential citations stand in for demand.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with open data from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> &amp; <a href="https://www.semanticscholar.org" target="_blank" rel="noopener">Semantic Scholar</a>. <span id="footUpdated"></span></p>
+    <p><a href="https://github.com/pars519-Tur/astronautics-atlas" target="_blank" rel="noopener">Star or contribute on GitHub</a> · <a href="data/dataset.json">Raw dataset (JSON)</a></p>
+  </footer>
+
+  <dialog id="paperModal">
+    <button class="close" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </dialog>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
