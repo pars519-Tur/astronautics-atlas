@@ -1,0 +1,25 @@
+name: 🛰️ New field
+description: Suggest an astronautics research area the atlas should cover
+title: "[Field] "
+labels: ["new field"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Field name
+      placeholder: e.g. Electric Propulsion, Orbit Determination, Re-entry & TPS
+    validations:
+      required: true
+  - type: input
+    id: topic
+    attributes:
+      label: OpenAlex topic ID (if you know it)
+      description: Search at https://api.openalex.org/topics?search=your+keywords
+      placeholder: T12345
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs in astronautics
+      description: Add a few landmark papers if you can.
+    validations:
+      required: true

@@ -90,7 +90,7 @@ OpenAlex gives every IP a small free daily budget, and a weekly run uses a tiny 
 
 ## Contributing
 
-Ideas, new fields, and better visualizations are all welcome.
+Ideas, new fields, and better visualizations are all welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
 - **Bad record?** OpenAlex occasionally misattributes citations. Add the work ID to [`scripts/blocklist.txt`](scripts/blocklist.txt) and open a PR.
 - **Missing field?** Propose an OpenAlex topic ID for `TOPICS` in an issue.

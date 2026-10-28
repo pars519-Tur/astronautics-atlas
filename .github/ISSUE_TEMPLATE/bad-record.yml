@@ -1,0 +1,29 @@
+name: 🧹 Bad record
+description: Report a paper that is misclassified, duplicated, or has inflated citations
+title: "[Record] "
+labels: ["data quality"]
+body:
+  - type: input
+    id: id
+    attributes:
+      label: OpenAlex work ID or paper title
+      description: Open the paper in the atlas and click "OpenAlex ↗" to find the W… ID.
+      placeholder: W1234567890
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What's wrong?
+      options:
+        - Not an astronautics paper
+        - Duplicate of another entry
+        - Citation count looks wrong
+        - Wrong field / topic
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
