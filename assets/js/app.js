@@ -297,6 +297,67 @@
       render(b.dataset.v);
     });
     render("all");
+    if (DATA.countryCoverage != null) {
+      $("#coverageNote").textContent = `Country is known for ${Math.round(DATA.countryCoverage * 100)}% of works (those with at least one recorded author affiliation), so counts are lower bounds. Rankings are what matter here.`;
+    }
+  }
+
+  /* ---------------- country growth ---------------- */
+  function countryGrowth() {
+    const cy = DATA.countryYears;
+    if (!cy) return;
+    const ys = cy.years, n = ys.length;
+    const early = `${ys[0]}–${String(ys[2]).slice(2)}`, late = `${ys[n - 3]}–${String(ys[n - 1]).slice(2)}`;
+    $("#growthSub").textContent = `${late} vs ${early}`;
+    const sum = a => a.reduce((x, y) => x + y, 0);
+    const growth = Object.entries(cy.series).map(([k, c]) => {
+      const e = sum(c.counts.slice(0, 3)), l = sum(c.counts.slice(-3));
+      return { key: k, name: c.name, e, l, ratio: e ? l / e : 0 };
+    }).filter(g => g.e >= 25 && g.l >= 100).sort((a, b) => b.ratio - a.ratio);
+    const top = growth.slice(0, 15).reverse();
+
+    const COLORS = ["#33d1c6", "#ffd166", "#ff7a45", "#c77dff", "#5b8cff", "#ff5d8f", "#8ce99a", "#7fdbff", "#e49a6c", "#a5d8ff"];
+    const shown = growth.slice(0, 5).map(g => g.key);
+    const traj = makeChart("trajChart", {});
+    // Index each country to its own 2016–18 average so small and large producers share one scale.
+    const indexed = k => { const c = cy.series[k].counts, base = sum(c.slice(0, 3)) / 3 || 1; return c.map(v => +(v / base).toFixed(2)); };
+    const drawTraj = () => {
+      traj.setOption({
+        tooltip: { ...tooltipStyle, trigger: "axis", order: "valueDesc", formatter: ps => `<b>${ps[0].axisValue}</b><br>` + ps.map(p =>
+          `${p.marker}${esc(p.seriesName)}: <b>${p.value}×</b> <span style="color:#8f9bc4">(${fmt(cy.series[shown[p.seriesIndex]].counts[p.dataIndex])} works)</span>`).join("<br>") },
+        legend: { top: 0, textStyle: { color: "#8f9bc4" }, icon: "circle", itemWidth: 9, itemHeight: 9 },
+        grid: { left: 10, right: 30, top: 40, bottom: 10, containLabel: true },
+        xAxis: { type: "category", data: ys, boundaryGap: false, ...axisStyle },
+        yAxis: { type: "value", ...axisStyle, axisLabel: { color: "#8f9bc4", formatter: v => v + "×" } },
+        series: shown.map((k, i) => ({
+          name: cy.series[k].name, type: "line", smooth: true, symbolSize: 6,
+          data: indexed(k), color: COLORS[i % COLORS.length], lineStyle: { width: 2.5 },
+          markLine: i ? undefined : { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: "rgba(143,155,196,.35)", type: "dashed" }, data: [{ yAxis: 1 }] },
+        })),
+      }, true);
+    };
+    const toggle = k => {
+      const i = shown.indexOf(k);
+      if (i >= 0) shown.splice(i, 1); else shown.push(k);
+      drawTraj();
+    };
+
+    makeChart("growthChart", {
+      grid: { left: 10, right: 50, top: 10, bottom: 10, containLabel: true },
+      tooltip: { ...tooltipStyle, formatter: p => { const g = top[p.dataIndex];
+        return `<b>${esc(g.name)}</b><br>${early}: ${fmt(g.e)} works<br>${late}: ${fmt(g.l)} works<br><b>${g.ratio.toFixed(1)}×</b> growth<br><span style="color:#8f9bc4">Click to compare</span>`; } },
+      xAxis: { type: "value", ...axisStyle, axisLabel: { color: "#8f9bc4", formatter: v => v + "×" } },
+      yAxis: { type: "category", data: top.map(g => g.name), ...axisStyle, axisLabel: { color: "#c4cbe8" } },
+      series: [{ type: "bar", barWidth: "60%", data: top.map(g => +g.ratio.toFixed(2)),
+        label: { show: true, position: "right", color: "#e8ecff", formatter: p => p.value.toFixed(1) + "×" },
+        itemStyle: { borderRadius: [0, 6, 6, 0], color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{ offset: 0, color: "#1d3a8f" }, { offset: 1, color: "#8ce99a" }]) } }],
+    }).on("click", p => toggle(top[p.dataIndex].key));
+
+    const pick = $("#trajPick");
+    Object.entries(cy.series).sort((a, b) => a[1].name.localeCompare(b[1].name))
+      .forEach(([k, c]) => pick.insertAdjacentHTML("beforeend", `<option value="${k}">${esc(c.name)}</option>`));
+    pick.addEventListener("change", () => { if (pick.value) toggle(pick.value); pick.value = ""; });
+    drawTraj();
   }
 
   /* ---------------- venues ---------------- */
@@ -387,7 +448,7 @@
     [...DATA.hallOfFame, ...DATA.rising, ...DATA.fresh, ...Object.values(DATA.topics).flatMap(t => t.top)].forEach(p => PAPERS.set(p.id, p));
     hero(); podium(); hallChips(); hallControls(); renderHall();
     rising(); galaxy(); landscape(); venues(); wireModal();
-    world();
+    countryGrowth(); world();
   }
   boot();
 })();

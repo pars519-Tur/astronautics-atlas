@@ -278,6 +278,18 @@ def main() -> None:
     institutions = group(allf, "authorships.institutions.lineage")[:25]
     oa = group(allf, "open_access.oa_status")
     recent_countries = group(f"{allf},from_publication_date:{year - 4}-01-01", "authorships.countries")
+    no_country = count(f"{allf},authorships.countries:null")
+
+    print("Country trajectories")
+    trend_years = list(range(year - 10, year))  # last 10 complete years
+    per_year = {y: {g["key"]: g["count"] for g in group(f"{allf},publication_year:{y}", "authorships.countries")}
+                for y in trend_years}
+    names = {c["key"]: c["name"] for c in countries}
+    country_years = {
+        "years": trend_years,
+        "series": {k: {"name": names[k], "counts": [per_year[y].get(k, 0) for y in trend_years]}
+                   for k in [c["key"] for c in countries[:70]]},
+    }
 
     all_papers = {p["id"]: p for p in hall + rising + fresh}
     print(f"Semantic Scholar enrichment ({len(all_papers)} papers)")
@@ -296,16 +308,20 @@ def main() -> None:
             "thisYear": count(f"{allf},publication_year:{year}"),
             "openAccess": sum(g["count"] for g in oa if g["key"] not in ("closed", "unknown")),
         },
+        "countryCoverage": None,
         "topics": topics,
         "hallOfFame": hall,
         "rising": rising,
         "fresh": fresh,
         "countries": countries,
         "recentCountries": recent_countries,
+        "countryYears": country_years,
         "sources": sources,
         "institutions": institutions,
         "openAccess": oa,
     }
+    total_filtered = count(allf)
+    dataset["countryCoverage"] = round(1 - no_country / total_filtered, 3) if total_filtered else None
     history = update_history(dataset)
     update_readme(dataset)
     dataset["historyLength"] = len(history["snapshots"])

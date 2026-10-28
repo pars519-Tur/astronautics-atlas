@@ -111,13 +111,22 @@
     <section id="world">
       <div class="sec-head">
         <h2><span class="num">05</span> Who builds the field</h2>
-        <p>Works with at least one author affiliated in each country. Switch to the last four years to see the new space race.</p>
+        <p>Works with at least one author affiliated in each country. Switch to the last four years, or scroll down to see who is growing fastest.</p>
       </div>
       <div class="card">
         <div class="seg" id="worldSeg"><button class="on" data-v="all">All time</button><button data-v="recent">Last 4 years</button></div>
         <div class="grid-2 wide-left flat">
           <div class="chart xl" id="worldChart"></div>
           <div class="chart xl" id="countryBar"></div>
+        </div>
+        <p class="note" id="coverageNote"></p>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="card"><h3>Fastest-growing countries <small id="growthSub"></small></h3><div class="chart tall" id="growthChart"></div></div>
+        <div class="card">
+          <h3>10-year trajectories <small>growth vs. own 2016–18 baseline</small></h3>
+          <div class="controls compact"><select id="trajPick" aria-label="Add a country to compare"><option value="">+ Compare a country…</option></select></div>
+          <div class="chart" id="trajChart" style="height:450px"></div>
         </div>
       </div>
     </section>
