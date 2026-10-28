@@ -280,14 +280,15 @@
           itemStyle: { borderRadius: [0, 6, 6, 0], color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{ offset: 0, color: "#2b3c8f" }, { offset: 1, color: "#33d1c6" }]) } }],
       }, true);
       if (!geoOk) return;
+      // Log scale: the US would otherwise wash every other country out to the same shade.
       const max = src[0]?.count || 1;
       map.setOption({
-        tooltip: { ...tooltipStyle, formatter: p => `${esc(p.name)}<br><b>${fmt(p.value || 0)}</b> works` },
-        visualMap: { min: 0, max, type: "continuous", calculable: false, orient: "horizontal", left: 10, bottom: 10, itemWidth: 10, itemHeight: 140,
-          inRange: { color: ["#16204a", "#2b4bbf", "#33d1c6", "#ffd166"] }, textStyle: { color: "#8f9bc4" }, formatter: compact },
+        tooltip: { ...tooltipStyle, formatter: p => `${esc(p.name)}<br><b>${fmt(p.data?.raw || 0)}</b> works` },
+        visualMap: { min: 0, max: Math.log10(max), type: "continuous", calculable: false, orient: "horizontal", left: 10, bottom: 10, itemWidth: 10, itemHeight: 160,
+          text: [compact(max), "1"], textGap: 8, inRange: { color: ["#141c42", "#1d3a8f", "#2f6fdf", "#33d1c6", "#d4fff8"] }, textStyle: { color: "#8f9bc4" } },
         series: [{ type: "map", map: "world", roam: true, scaleLimit: { min: 1, max: 6 }, emphasis: { label: { show: false }, itemStyle: { areaColor: "#ff7a45" } },
-          itemStyle: { areaColor: "#0f1530", borderColor: "rgba(130,160,255,.18)" },
-          nameMap: {}, data: src.map(c => ({ name: MAP_NAMES[c.name] || c.name, value: c.count })) }],
+          itemStyle: { areaColor: "#0c1128", borderColor: "rgba(130,160,255,.18)" },
+          data: src.map(c => ({ name: MAP_NAMES[c.name] || c.name, value: Math.log10(c.count), raw: c.count })) }],
       }, true);
     };
     $("#worldSeg").addEventListener("click", e => {
