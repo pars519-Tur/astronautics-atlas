@@ -102,9 +102,14 @@ def top_works(filt: str, n: int) -> list[dict]:
     return works[:n]
 
 
+# Official short names where OpenAlex still uses an older form.
+DISPLAY_NAMES = {"Turkey": "Türkiye"}
+
+
 def group(filt: str, field: str) -> list[dict]:
     res = openalex("works", filter=filt, group_by=field)
-    return [{"key": g["key"].rsplit("/", 1)[-1], "name": g["key_display_name"], "count": g["count"]}
+    return [{"key": g["key"].rsplit("/", 1)[-1],
+             "name": DISPLAY_NAMES.get(g["key_display_name"], g["key_display_name"]), "count": g["count"]}
             for g in res["group_by"]]
 
 

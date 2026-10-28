@@ -13,6 +13,8 @@
     "Central African Republic": "Central African Rep.", "Dominican Republic": "Dominican Rep.",
     "Equatorial Guinea": "Eq. Guinea", "Western Sahara": "W. Sahara",
   };
+  // Map regions shown under their official names (applied via the series nameMap)
+  const GEO_RENAME = { "Turkey": "Türkiye" };
   const TYPE_LABEL = { article: "Article", review: "Review", book: "Book", "book-chapter": "Chapter" };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -288,7 +290,7 @@
           text: [compact(max), "1"], textGap: 8, inRange: { color: ["#141c42", "#1d3a8f", "#2f6fdf", "#33d1c6", "#d4fff8"] }, textStyle: { color: "#8f9bc4" } },
         series: [{ type: "map", map: "world", roam: true, scaleLimit: { min: 1, max: 6 }, emphasis: { label: { show: false }, itemStyle: { areaColor: "#ff7a45" } },
           itemStyle: { areaColor: "#0c1128", borderColor: "rgba(130,160,255,.18)" },
-          data: src.map(c => ({ name: MAP_NAMES[c.name] || c.name, value: Math.log10(c.count), raw: c.count })) }],
+          nameMap: GEO_RENAME, data: src.map(c => ({ name: MAP_NAMES[c.name] || c.name, value: Math.log10(c.count), raw: c.count })) }],
       }, true);
     };
     $("#worldSeg").addEventListener("click", e => {
