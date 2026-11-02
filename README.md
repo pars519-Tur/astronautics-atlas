@@ -35,16 +35,16 @@ Each paper opens a detail card with its citation history, influential-citation c
 |---:|---|:---:|---:|
 | 1 | [Survey of Numerical Methods for Trajectory Optimization](https://doi.org/10.2514/2.4231) <br><sub>John T. Betts</sub> | 1998 | 2,605 |
 | 2 | [Terminal Guidance System for Satellite Rendezvous](https://doi.org/10.2514/8.8704) <br><sub>W. H. Clohessy et al.</sub> | 1960 | 2,093 |
-| 3 | [Spacecraft Attitude Determination and Control](https://doi.org/10.1007/978-94-009-9907-7) <br><sub>James R. Wertz</sub> | 1978 | 1,892 |
-| 4 | [Rocket Propulsion Elements](https://doi.org/10.1063/1.3066790) <br><sub>George P. Sutton et al.</sub> | 1950 | 1,761 |
-| 5 | [An introduction to the mathematics and methods of astrodynamics](https://openalex.org/W1511057778) <br><sub>Richard H. Battin</sub> | 1987 | 1,737 |
-| 6 | [Analytical Mechanics Of Space Systems](https://doi.org/10.2514/4.861550) <br><sub>Hanspeter Schaub et al.</sub> | 2003 | 1,578 |
-| 7 | [The evolution of orbits of artificial satellites of planets under the action of gravitational perturbations of external bodies](https://doi.org/10.1016/0032-0633(62)90129-0) <br><sub>M. L. Lidov</sub> | 1962 | 1,570 |
-| 8 | [Spacecraft Attitude Dynamics](https://openalex.org/W1499655155) <br><sub>Peter C. Hughes</sub> | 1986 | 1,566 |
-| 9 | [Satellite Communications in the New Space Era: A Survey and Future Challenges](https://doi.org/10.1109/comst.2020.3028247) <br><sub>Oltjon Kodheli et al.</sub> | 2020 | 1,555 |
-| 10 | [Fundamentals of Astrodynamics and Applications](https://openalex.org/W1666375428) <br><sub>David Vallado</sub> | 1997 | 1,537 |
+| 3 | [Spacecraft Attitude Determination and Control](https://doi.org/10.1007/978-94-009-9907-7) <br><sub>James R. Wertz</sub> | 1978 | 1,893 |
+| 4 | [Rocket Propulsion Elements](https://doi.org/10.1063/1.3066790) <br><sub>George P. Sutton et al.</sub> | 1950 | 1,762 |
+| 5 | [An introduction to the mathematics and methods of astrodynamics](https://openalex.org/W1511057778) <br><sub>Richard H. Battin</sub> | 1987 | 1,736 |
+| 6 | [Analytical Mechanics Of Space Systems](https://doi.org/10.2514/4.861550) <br><sub>Hanspeter Schaub et al.</sub> | 2003 | 1,579 |
+| 7 | [Satellite Communications in the New Space Era: A Survey and Future Challenges](https://doi.org/10.1109/comst.2020.3028247) <br><sub>Oltjon Kodheli et al.</sub> | 2020 | 1,568 |
+| 8 | [The evolution of orbits of artificial satellites of planets under the action of gravitational perturbations of external bodies](https://doi.org/10.1016/0032-0633(62)90129-0) <br><sub>M. L. Lidov</sub> | 1962 | 1,568 |
+| 9 | [Spacecraft Attitude Dynamics](https://openalex.org/W1499655155) <br><sub>Peter C. Hughes</sub> | 1986 | 1,565 |
+| 10 | [Fundamentals of Astrodynamics and Applications](https://openalex.org/W1666375428) <br><sub>David Vallado</sub> | 1997 | 1,536 |
 
-<sub>Auto-updated 2026-10-28 · 274,425 astronautics works indexed</sub>
+<sub>Auto-updated 2026-11-02 · 275,993 astronautics works indexed</sub>
 <!-- TOP10:END -->
 
 ## Fields covered
