@@ -33,18 +33,18 @@ Each paper opens a detail card with its citation history, influential-citation c
 <!-- TOP10:START -->
 | # | Paper | Year | Citations |
 |---:|---|:---:|---:|
-| 1 | [Survey of Numerical Methods for Trajectory Optimization](https://doi.org/10.2514/2.4231) <br><sub>John T. Betts</sub> | 1998 | 2,679 |
-| 2 | [Terminal Guidance System for Satellite Rendezvous](https://doi.org/10.2514/8.8704) <br><sub>W. H. Clohessy et al.</sub> | 1960 | 2,224 |
-| 3 | [Spacecraft Attitude Determination and Control](https://doi.org/10.1007/978-94-009-9907-7) <br><sub>James R. Wertz</sub> | 1978 | 1,924 |
-| 4 | [Rocket Propulsion Elements](https://doi.org/10.1063/1.3066790) <br><sub>George P. Sutton et al.</sub> | 1950 | 1,769 |
-| 5 | [An introduction to the mathematics and methods of astrodynamics](https://openalex.org/W1511057778) <br><sub>Richard H. Battin</sub> | 1987 | 1,752 |
-| 6 | [Satellite Communications in the New Space Era: A Survey and Future Challenges](https://doi.org/10.1109/comst.2020.3028247) <br><sub>Oltjon Kodheli et al.</sub> | 2020 | 1,705 |
-| 7 | [The evolution of orbits of artificial satellites of planets under the action of gravitational perturbations of external bodies](https://doi.org/10.1016/0032-0633(62)90129-0) <br><sub>M. L. Lidov</sub> | 1962 | 1,660 |
-| 8 | [Analytical Mechanics Of Space Systems](https://doi.org/10.2514/4.861550) <br><sub>Hanspeter Schaub et al.</sub> | 2003 | 1,590 |
-| 9 | [Fundamentals of Astrodynamics and Applications](https://openalex.org/W1666375428) <br><sub>David Vallado</sub> | 1997 | 1,540 |
-| 10 | [A survey of attitude representation](https://openalex.org/W2467377838) <br><sub>Malcolm D. Shuster</sub> | 1993 | 1,495 |
+| 1 | [Survey of Numerical Methods for Trajectory Optimization](https://doi.org/10.2514/2.4231) <br><sub>John T. Betts</sub> | 1998 | 3,044 |
+| 2 | [Terminal Guidance System for Satellite Rendezvous](https://doi.org/10.2514/8.8704) <br><sub>W. H. Clohessy et al.</sub> | 1960 | 2,501 |
+| 3 | [Spacecraft Attitude Determination and Control](https://doi.org/10.1007/978-94-009-9907-7) <br><sub>James R. Wertz</sub> | 1978 | 2,291 |
+| 4 | [Space Mission Analysis and Design](https://doi.org/10.1007/978-94-011-2692-2) <br><sub>Wiley J. Larson et al.</sub> | 1992 | 2,259 |
+| 5 | [An introduction to the mathematics and methods of astrodynamics](https://openalex.org/W1511057778) <br><sub>Richard H. Battin</sub> | 1987 | 1,980 |
+| 6 | [A survey of attitude representation](https://openalex.org/W2467377838) <br><sub>Malcolm D. Shuster</sub> | 1993 | 1,972 |
+| 7 | [Satellite Communications in the New Space Era: A Survey and Future Challenges](https://doi.org/10.1109/comst.2020.3028247) <br><sub>Oltjon Kodheli et al.</sub> | 2020 | 1,967 |
+| 8 | [The evolution of orbits of artificial satellites of planets under the action of gravitational perturbations of external bodies](https://doi.org/10.1016/0032-0633(62)90129-0) <br><sub>M. L. Lidov</sub> | 1962 | 1,877 |
+| 9 | [Rocket Propulsion Elements](https://doi.org/10.1063/1.3066790) <br><sub>George P. Sutton et al.</sub> | 1950 | 1,770 |
+| 10 | [Fundamentals of Astrodynamics and Applications](https://openalex.org/W1666375428) <br><sub>David Vallado</sub> | 1997 | 1,760 |
 
-<sub>Auto-updated 2026-11-16 · 268,741 astronautics works indexed</sub>
+<sub>Auto-updated 2026-11-23 · 237,413 astronautics works indexed</sub>
 <!-- TOP10:END -->
 
 ## Fields covered
